@@ -11,6 +11,7 @@
 	<groupId>com.eazybytes</groupId>
 	<artifactId>loan</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>loan</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -91,6 +92,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<image>
+						<name>bharatt619/${project.artifactId}:s4</name>
+					</image>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
