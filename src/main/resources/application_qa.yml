@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+build:
+  version: 4.4.1
+
+loan:
+  message: "Welcome to QA Loans API"
+  contactDetails:
+    name: "John QA"
+    email: "johnQA@gmail.com"
+  onCallSupport:
+    - (555) 555-999
+    - (555) 523-888

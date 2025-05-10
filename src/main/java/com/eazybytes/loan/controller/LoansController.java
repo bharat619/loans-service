@@ -3,6 +3,7 @@ package com.eazybytes.loan.controller;
 import com.eazybytes.loan.constants.LoanConstants;
 import com.eazybytes.loan.dto.ErrorResponseDto;
 import com.eazybytes.loan.dto.LoanDto;
+import com.eazybytes.loan.dto.LoansContactInformation;
 import com.eazybytes.loan.dto.ResponseDto;
 import com.eazybytes.loan.service.LoanService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +21,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class LoansController {
-    private LoanService loanService;
+    private final LoanService loanService;
+
+    private final LoansContactInformation loansContactInformation;
 
     @Operation(summary = "Get loan details based on loan number")
     @ApiResponses({
@@ -135,5 +139,11 @@ public class LoansController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ResponseDto(LoanConstants.STATUS_417, LoanConstants.MESSAGE_417_DELETE));
         }
+    }
+
+    @GetMapping("/contact-info")
+    public ResponseEntity<LoansContactInformation> getContactInfo() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(loansContactInformation);
     }
 }

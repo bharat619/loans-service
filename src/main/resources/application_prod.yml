@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+build:
+  version: 4.4.1
+
+loan:
+  message: "Welcome to PROD Loans API"
+  contactDetails:
+    name: "John PROD"
+    email: "johnprod@gmail.com"
+  onCallSupport:
+    - (555) 555-444
+    - (555) 523-666
