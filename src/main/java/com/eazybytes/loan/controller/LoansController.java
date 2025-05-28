@@ -14,6 +14,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,7 @@ public class LoansController {
     private final LoanService loanService;
 
     private final LoansContactInformation loansContactInformation;
-
+    private static final Logger logger = LoggerFactory.getLogger(LoansController.class);
     @Operation(summary = "Get loan details based on loan number")
     @ApiResponses({
             @ApiResponse(
@@ -65,9 +67,11 @@ public class LoansController {
     }
     )
     @GetMapping("/fetch")
-    public ResponseEntity<LoanDto> getLoan(@RequestParam
+    public ResponseEntity<LoanDto> getLoan(@RequestHeader("eazybank-correlation-id") String correlationId,
+                                           @RequestParam
                                            @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
                                            String mobileNumber) {
+        logger.debug("eazybank-correlation-id ID found {}", correlationId);
         LoanDto loanDto = loanService.fetchLoan(mobileNumber);
 
         return ResponseEntity.status(HttpStatus.OK).body(loanDto);
