@@ -147,7 +147,9 @@ public class LoansController {
 
     @GetMapping("/contact-info")
     public ResponseEntity<LoansContactInformation> getContactInfo() {
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(loansContactInformation);
+        logger.info("Invoked Loans Contact Info");
+        throw new RuntimeException();
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(loansContactInformation);
     }
 }
